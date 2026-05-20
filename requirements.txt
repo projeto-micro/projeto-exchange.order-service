@@ -1,0 +1,8 @@
+fastapi==0.115.12
+uvicorn[standard]==0.34.0
+httpx==0.28.1
+sqlalchemy[asyncio]==2.0.40
+aiosqlite==0.20.0
+pydantic==2.11.3
+prometheus-fastapi-instrumentator==7.1.0
+uuid7==0.1.0

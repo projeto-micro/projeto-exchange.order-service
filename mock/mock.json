@@ -1,0 +1,15 @@
+[
+  {
+    "httpRequest": {
+      "method": "GET",
+      "path": "/products/.*"
+    },
+    "httpResponse": {
+      "statusCode": 200,
+      "headers": {
+        "Content-Type": ["application/json"]
+      },
+      "body": "{\"id\": \"abc-123\", \"name\": \"Product Mock\", \"price\": 10.50}"
+    }
+  }
+]
