@@ -19,7 +19,7 @@ metadata:
     app: order
 type: Opaque
 stringData:
-  DATABASE_URL: "postgresql+asyncpg://order_user:order_pass@order-db:5432/order_db"
+  DATABASE_URL: "postgresql+asyncpg://store:store@postgres:5432/store"
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -69,53 +69,3 @@ spec:
       targetPort: 8080
   selector:
     app: order
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: order-db
-  labels:
-    app: order-db
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: order-db
-  template:
-    metadata:
-      labels:
-        app: order-db
-    spec:
-      containers:
-        - name: postgres
-          image: postgres:16-alpine
-          ports:
-            - containerPort: 5432
-          env:
-            - name: POSTGRES_DB
-              value: order_db
-            - name: POSTGRES_USER
-              value: order_user
-            - name: POSTGRES_PASSWORD
-              value: order_pass
-          resources:
-            requests:
-              memory: "128Mi"
-              cpu: "100m"
-            limits:
-              memory: "256Mi"
-              cpu: "500m"
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: order-db
-  labels:
-    app: order-db
-spec:
-  type: ClusterIP
-  ports:
-    - port: 5432
-      targetPort: 5432
-  selector:
-    app: order-db
